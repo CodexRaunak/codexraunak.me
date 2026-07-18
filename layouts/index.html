@@ -1,0 +1,27 @@
+{{ define "main" }}
+<section class="intro">
+  <h1 class="intro-name">{{ .Site.Params.author }}</h1>
+  <p class="intro-tagline">{{ .Site.Params.tagline }}</p>
+  {{ partial "social.html" . }}
+  {{- with .Content }}<div class="intro-body">{{ . }}</div>{{ end }}
+</section>
+
+<section class="post-list-section">
+  <h2 class="section-label">Writing</h2>
+  {{- $posts := where .Site.RegularPages "Section" "posts" -}}
+  {{- if $posts }}
+  <ul class="post-list">
+    {{- range first 5 $posts }}
+    <li class="post-item">
+      <a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ partial "post-meta.html" . }}
+      {{- with .Description }}<p class="post-excerpt">{{ . }}</p>{{ end }}
+    </li>
+    {{- end }}
+  </ul>
+  {{- if gt (len $posts) 5 }}<p class="more"><a href="{{ "/posts/" | relURL }}">All posts →</a></p>{{ end }}
+  {{- else }}
+  <p class="empty-note">No posts published yet — the first ones are on the way.</p>
+  {{- end }}
+</section>
+{{ end }}

@@ -1,0 +1,23 @@
+{{ define "main" }}
+<article class="page">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- with .Content }}<div class="page-intro">{{ . }}</div>{{ end }}
+  </header>
+
+  {{- $pages := .Pages -}}
+  {{- if $pages }}
+  <ul class="post-list">
+    {{- range $pages.ByDate.Reverse }}
+    <li class="post-item">
+      <a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ partial "post-meta.html" . }}
+      {{- with .Description }}<p class="post-excerpt">{{ . }}</p>{{ end }}
+    </li>
+    {{- end }}
+  </ul>
+  {{- else }}
+  <p class="empty-note">Nothing here yet.</p>
+  {{- end }}
+</article>
+{{ end }}

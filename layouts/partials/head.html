@@ -1,0 +1,27 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {{- $title := .Title -}}
+  {{- if .IsHome }}<title>{{ .Site.Title }}</title>
+  {{- else }}<title>{{ $title }} · {{ .Site.Title }}</title>{{ end }}
+
+  {{- $desc := .Description | default .Site.Params.description -}}
+  <meta name="description" content="{{ $desc }}" />
+  <meta name="author" content="{{ .Site.Params.author }}" />
+
+  <!-- Open Graph / Twitter (plain, no images required) -->
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ $title }}{{ end }}" />
+  <meta property="og:description" content="{{ $desc }}" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <meta name="twitter:card" content="summary" />
+  {{- with .Site.Params.social.twitter }}<meta name="twitter:creator" content="@{{ . }}" />{{ end }}
+
+  {{- /* Self-hosted, fingerprinted, minified CSS — no external requests. */ -}}
+  {{- $css := resources.Get "css/main.css" | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+
+  <link rel="canonical" href="{{ .Permalink }}" />
+  {{ hugo.Generator }}
+</head>

@@ -1,0 +1,74 @@
+baseURL = "https://codexraunak.me/"
+languageCode = "en-us"
+title = "Raunak Madan"
+enableRobotsTXT = true
+
+# Read time / word counts stay accurate for CJK too; harmless default.
+hasCJKLanguage = true
+
+# --- Content pipeline -------------------------------------------------------
+# The blog pipeline keeps drafts and published posts in separate folders:
+#   content/blog/drafts/     <- blog-compose writes here (draft: true) — NOT mounted, never rendered
+#   content/blog/published/  <- blog-publish moves approved posts here — mounted as the /posts/ section
+# Declaring any mount replaces Hugo's default mounts, so every dir we use is re-declared below.
+[module]
+  # Standalone pages (home, about, projects) live in pages/ so the content/ root is never
+  # mounted wholesale — that keeps content/blog/drafts/ out of the site with no exclude rules.
+  [[module.mounts]]
+    source = "pages"
+    target = "content"
+  # Surface only published posts, at /posts/. Drafts (content/blog/drafts/) are never mounted.
+  [[module.mounts]]
+    source = "content/blog/published"
+    target = "content/posts"
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "archetypes"
+    target = "archetypes"
+
+# Map the pipeline's `created:` field onto Hugo's date so posts sort/display correctly
+# without rewriting blog-compose output.
+[frontmatter]
+  date = ["created", "date", "publishDate"]
+
+[markup]
+  [markup.highlight]
+    noClasses = false               # emit CSS classes so highlighting theming lives in main.css
+    tabWidth = 2
+  [markup.goldmark.renderer]
+    unsafe = true                   # allow raw HTML in posts (tables, <kbd>, etc.)
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    pageRef = "/posts"
+    weight = 10
+  [[menu.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 20
+  [[menu.main]]
+    name = "Projects"
+    pageRef = "/projects"
+    weight = 30
+
+[params]
+  author = "Raunak Madan"
+  tagline = "Open-source engineer working in cloud native — CNCF / Meshery, GSoC mentor."
+  description = "Personal site of Raunak Madan — open-source engineer. Blogs on Docker, Kubernetes, and building things that ship."
+  # Social handles (consumed by layouts/partials/social.html)
+  [params.social]
+    github = "CodexRaunak"
+    twitter = "CodexRaunak"
+    linkedin = "madan-raunak"
+    email = "madanraunak24@gmail.com"
+    medium = "@madanraunak24"
+    hashnode = "@Raunak24"

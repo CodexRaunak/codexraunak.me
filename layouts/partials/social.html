@@ -1,0 +1,10 @@
+{{- /* Renders the social link row from [params.social]. Text links only — no icon fonts, no CDN. */ -}}
+{{- $s := .Site.Params.social -}}
+<nav class="social" aria-label="Social links">
+  {{- with $s.github }}<a href="https://github.com/{{ . }}" rel="me">GitHub</a>{{ end }}
+  {{- with $s.twitter }}<a href="https://x.com/{{ . }}" rel="me">X</a>{{ end }}
+  {{- with $s.linkedin }}<a href="https://linkedin.com/in/{{ . }}" rel="me">LinkedIn</a>{{ end }}
+  {{- with $s.medium }}<a href="https://medium.com/{{ . }}" rel="me">Medium</a>{{ end }}
+  {{- with $s.hashnode }}<a href="https://hashnode.com/{{ . }}" rel="me">Hashnode</a>{{ end }}
+  {{- with $s.email }}<a href="mailto:{{ . }}">Email</a>{{ end }}
+</nav>

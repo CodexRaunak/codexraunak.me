@@ -1,0 +1,6 @@
+{{- /* Post metadata line: date · read time. Expects a page as context. */ -}}
+<span class="post-meta">
+  {{- with .Date }}<time datetime="{{ .Format "2006-01-02" }}">{{ .Format "Jan 2, 2006" }}</time>{{ end }}
+  {{- if and .Date .ReadingTime }} · {{ end }}
+  {{- with .ReadingTime }}{{ . }} min read{{ end }}
+</span>

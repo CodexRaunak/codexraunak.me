@@ -1,0 +1,164 @@
+/* ============================================================================
+   Raunak Madan — personal site
+   One background, one foreground, one accent. Consistent type. That's the brief.
+   ========================================================================== */
+
+:root {
+  /* Light theme (default) */
+  --bg:      #fbfbf9;
+  --fg:      #1a1a1a;
+  --muted:   #6b6b6b;
+  --accent:  #b5533b;   /* a single warm accent for links */
+  --rule:    #e5e4df;
+  --code-bg: #f0efe9;
+
+  --measure: 40rem;                 /* ~65ch readable column */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+               Arial, "Apple Color Emoji", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+               "Liberation Mono", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:      #161614;
+    --fg:      #e8e6e0;
+    --muted:   #9a978f;
+    --accent:  #e08a6f;
+    --rule:    #2b2b28;
+    --code-bg: #22221f;
+  }
+}
+
+/* ---- Reset-ish ----------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Layout -------------------------------------------------------------- */
+.wrap {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem 4rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1 0 auto; }
+
+/* ---- Links --------------------------------------------------------------- */
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/* ---- Header -------------------------------------------------------------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 3rem;
+}
+.site-name { color: var(--fg); font-weight: 650; letter-spacing: -0.01em; }
+.site-nav { display: flex; gap: 1.1rem; }
+.site-nav a { color: var(--muted); }
+.site-nav a:hover, .site-nav a.active { color: var(--fg); text-decoration: none; }
+
+/* ---- Home intro ---------------------------------------------------------- */
+.intro { margin-bottom: 3.25rem; }
+.intro-name { font-size: 1.9rem; margin: 0 0 0.35rem; letter-spacing: -0.02em; }
+.intro-tagline { color: var(--muted); margin: 0 0 1.1rem; font-size: 1.1rem; }
+.intro-body { margin-top: 1.25rem; }
+
+/* ---- Social row ---------------------------------------------------------- */
+.social { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.95rem; }
+.social a { color: var(--muted); }
+.social a:hover { color: var(--accent); text-decoration: none; }
+
+/* ---- Section labels ------------------------------------------------------ */
+.section-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+}
+
+/* ---- Post list ----------------------------------------------------------- */
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-item { padding: 0 0 1.6rem; margin: 0 0 1.6rem; border-bottom: 1px solid var(--rule); }
+.post-item:last-child { border-bottom: 0; margin-bottom: 0; }
+.post-title { font-size: 1.2rem; font-weight: 600; color: var(--fg); letter-spacing: -0.01em; }
+.post-title:hover { color: var(--accent); text-decoration: none; }
+.post-meta { display: block; color: var(--muted); font-size: 0.875rem; margin-top: 0.2rem; }
+.post-excerpt { margin: 0.5rem 0 0; color: var(--muted); }
+.more { margin-top: 1.75rem; }
+.empty-note { color: var(--muted); }
+
+/* ---- Pages & prose ------------------------------------------------------- */
+.page-header h1 { font-size: 1.75rem; margin: 0 0 0.4rem; letter-spacing: -0.02em; }
+.page-intro { color: var(--muted); margin-bottom: 1.5rem; }
+.post-meta-line { margin-bottom: 1.25rem; }
+
+.prose { }
+.prose h2 { font-size: 1.3rem; margin: 2.25rem 0 0.75rem; letter-spacing: -0.01em; }
+.prose h3 { font-size: 1.1rem; margin: 1.75rem 0 0.5rem; }
+.prose p, .prose ul, .prose ol { margin: 0 0 1.15rem; }
+.prose ul, .prose ol { padding-left: 1.3rem; }
+.prose li { margin: 0.3rem 0; }
+.prose img { max-width: 100%; height: auto; border-radius: 4px; }
+.prose blockquote {
+  margin: 1.25rem 0;
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 3px solid var(--rule);
+  color: var(--muted);
+}
+.prose hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+
+/* Tables (used in posts) scroll rather than overflow the page */
+.prose table { border-collapse: collapse; width: 100%; margin: 1.25rem 0; font-size: 0.95rem; }
+.prose thead th { text-align: left; border-bottom: 2px solid var(--rule); padding: 0.5rem 0.6rem; }
+.prose td { border-bottom: 1px solid var(--rule); padding: 0.5rem 0.6rem; vertical-align: top; }
+.prose > table,
+.prose .table-wrap { display: block; overflow-x: auto; }
+
+/* Code */
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--code-bg);
+  padding: 0.12em 0.35em;
+  border-radius: 4px;
+}
+.prose pre {
+  background: var(--code-bg);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+.prose pre code { background: none; padding: 0; font-size: 0.875rem; }
+
+/* Tags */
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+.tag {
+  font-size: 0.75rem; color: var(--muted);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 0.05rem 0.55rem;
+}
+
+/* ---- Footer -------------------------------------------------------------- */
+.site-footer { margin-top: 4rem; }
+.site-footer hr { border: 0; border-top: 1px solid var(--rule); margin: 0 0 1.5rem; }
+.colophon { color: var(--muted); font-size: 0.85rem; margin: 1rem 0 0; }
+.post-footer { margin-top: 3rem; }
+.post-footer hr { border: 0; border-top: 1px solid var(--rule); margin-bottom: 1.5rem; }

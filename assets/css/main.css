@@ -149,6 +149,9 @@ a:hover { text-decoration: underline; text-underline-offset: 2px; }
 }
 .prose pre code { background: none; padding: 0; font-size: 0.875rem; }
 
+/* Mermaid diagrams: not a code block — centered, no code chrome */
+.prose pre.mermaid { background: transparent; padding: 0; text-align: center; overflow-x: auto; }
+
 /* Tags */
 .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
 .tag {

@@ -2,8 +2,7 @@
 title: "Docker, Part 1: What It Is and Why It Exists"
 description: "A friendly, ground-up walk through what Docker actually is — the 'works on my machine' problem it kills, images vs containers, and the client–daemon architecture — using my TaskHub project as the running example."
 tags: [docker, containers, devops, taskhub, series]
-draft: true
-status: needs-human-review
+draft: false
 created: 2026-07-18
 generated_by: blog-compose
 brain_ref:
@@ -168,24 +167,3 @@ Strip away the story and here's what's worth keeping:
 That's the mental model. In the next parts we'll actually get our hands dirty — Dockerfiles and image layers, how the build cache decides your life, `.dockerignore`, and eventually Compose and networking, all on TaskHub. But you now have the thing most tutorials skip: a reason to care.
 
 See you in Part 2.
-
-<!-- REVIEW — remove before publishing
-
-Drawn from Brain (B-20260717-docker-concepts-1):
-- Thesis preserved verbatim in frontmatter (explain Docker pragmatically via the TaskHub project; Part 1 of a series).
-- Tone directive followed: friendly, story-like (the café / prod-broke cold open, "works on my machine"), story kept as flavor and NOT allowed to overshadow the concepts — casual only in spots, as the note asked.
-- Structure follows the note's Part-1 scope request: what Docker is + background + architecture. Diagrams rendered as Mermaid (see below).
-
-Drawn from Foundry:
-- F-C-docker-fundamentals — status: LIMITED-TRIANGULATION (one independence group `human-docker-learning-notes`, both source cards UNVERIFIED). Used for: the "works on my machine" problem + old-solutions tables, image-vs-container (class/object), the CLI→daemon→container/registry description, and the TaskHub section.
-  Locators: raw/Docker What is Docker.md — Summary (9-12), Why Docker Exists (15-39), Image vs Container (44-67), Docker Architecture (70-93), How TaskHub Uses Docker (96-122).
-- F-C-docker-architecture-overview — status: CANDIDATE (single anonymous, UNVERIFIED Medium article; independence group `medium-docker-architecture-guide`). Used only to corroborate the Engine = daemon + client framing and registry/Docker Hub description.
-  Locators: raw/Docker Architecture.md — lines 19-23 (daemon/client), 25-31 (images/containers), 33-35 (registry).
-
-Weak spots / verify before publish:
-1. STATUS HONESTY: Every technical claim in this post traces to UNVERIFIED Foundry material — the fundamentals concept is `limited-triangulation` and the architecture concept is `candidate`. Nothing here has been checked against authoritative docs (docs.docker.com). Verify the image/container, client–daemon, and registry claims against official Docker docs before publishing. The two Foundry sources share NO independent corroboration (different independence groups, both unverified), so agreement between them is not proof.
-2. TaskHub specifics (services api/postgres/redis, "Node 23 on Alpine", non-root user) are flagged in the Foundry ledger as project-context, LOW confidence, and NOT checked against the repo. The draft deliberately hedges this in-text, but before publishing, open github.com/CodexRaunak/taskhub and confirm the actual Dockerfile/compose services, base image, and user. Correct the draft to match the repo.
-3. HISTORY GAP (requested by Brain, not in Foundry): The Brain note asked for Docker's "history + background." Foundry has ZERO historical material — no dates, no company/dotCloud origin, no LXC/cgroups/namespaces lineage. Rather than fabricate it, I reframed "background" as the problem Docker solves (honest, sourced) and added an in-text note deferring the real history to its own post. DECISION NEEDED: either (a) accept the deferral as written, or (b) capture authoritative Docker-history sources into Foundry first, then add a history section. Do not let me invent dates.
-4. DIAGRAMS: The Brain note wanted flowcharts/diagrams and suggested possibly pulling images from the web/Docker docs. I did NOT fetch external images — the two diagrams in the Medium raw were miro.medium.com assets that were never captured (unverifiable), and fetching is out of scope for this skill. Instead I reproduced Foundry's two ASCII diagrams as portable ```mermaid blocks. The target site has no framework yet, so confirm your eventual site renders Mermaid (or convert these to SVG/images) before publishing.
-5. Registry internals, VM-vs-container depth, security boundaries, and OCI/layer internals are intentionally NOT covered here — the evidence is thin and they belong to later parts. Don't let scope creep pull unsourced claims in.
--->

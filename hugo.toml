@@ -3,6 +3,9 @@ languageCode = "en-us"
 title = "Raunak Madan"
 enableRobotsTXT = true
 
+# Minimal by design: no taxonomy/term pages (tags still display on posts, just aren't linked archives).
+disableKinds = ["taxonomy", "term"]
+
 # Read time / word counts stay accurate for CJK too; harmless default.
 hasCJKLanguage = true
 

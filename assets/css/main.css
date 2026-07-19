@@ -75,6 +75,14 @@ a:hover { text-decoration: underline; text-underline-offset: 2px; }
 
 /* ---- Home intro ---------------------------------------------------------- */
 .intro { margin-bottom: 3.25rem; }
+.avatar-link { display: inline-block; line-height: 0; }
+.avatar {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.1rem;
+  border: 1px solid var(--rule);
+}
 .intro-name { font-size: 1.9rem; margin: 0 0 0.35rem; letter-spacing: -0.02em; }
 .intro-tagline { color: var(--muted); margin: 0 0 1.1rem; font-size: 1.1rem; }
 .intro-body { margin-top: 1.25rem; }

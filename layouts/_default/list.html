@@ -19,5 +19,9 @@
   {{- else }}
   <p class="empty-note">Nothing here yet.</p>
   {{- end }}
+
+  {{- if eq .Section "posts" }}
+  {{ partial "external-posts.html" . }}
+  {{- end }}
 </article>
 {{ end }}

@@ -101,6 +101,8 @@ a:hover { text-decoration: underline; text-underline-offset: 2px; }
   font-weight: 600;
   margin: 0 0 1.25rem;
 }
+.post-list-section + .post-list-section { margin-top: 3rem; }
+.section-note { color: var(--muted); margin: -0.5rem 0 1.25rem; font-size: 0.95rem; }
 
 /* ---- Post list ----------------------------------------------------------- */
 .post-list { list-style: none; margin: 0; padding: 0; }

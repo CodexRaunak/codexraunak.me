@@ -1,0 +1,45 @@
+{{- /* Pulls posts from external blog RSS feeds (Hashnode, Medium) at build time and
+       renders them newest-first with a source label. Degrades gracefully: if a feed
+       is unreachable or unparseable, that feed is skipped and the build never fails. */ -}}
+{{- $feeds := slice
+      (dict "name" "Hashnode" "url" "https://codexraunak.hashnode.dev/rss.xml")
+      (dict "name" "Medium"   "url" "https://medium.com/feed/@madanraunak24")
+-}}
+{{- $posts := slice -}}
+{{- range $feeds -}}
+  {{- $name := .name -}}
+  {{- with try (resources.GetRemote .url) -}}
+    {{- with .Err -}}
+      {{- warnf "external-posts: could not fetch %s (%s)" $name . -}}
+    {{- else with .Value -}}
+      {{- $data := . | transform.Unmarshal -}}
+      {{- with $data.channel.item -}}
+        {{- range . -}}
+          {{- $url := replaceRE `\?source=.*$` "" .link -}}
+          {{- $posts = $posts | append (dict
+                "title"  (.title | plainify | htmlUnescape)
+                "url"    $url
+                "date"   (time.AsTime .pubDate)
+                "source" $name) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with sort $posts "date" "desc" }}
+<section class="post-list-section">
+  <h2 class="section-label">Elsewhere</h2>
+  <p class="section-note">Longer pieces I've published on Hashnode and Medium.</p>
+  <ul class="post-list">
+    {{- range . }}
+    <li class="post-item">
+      <a class="post-title" href="{{ .url }}" rel="noopener" target="_blank">{{ .title }} ↗</a>
+      <span class="post-meta">
+        <time datetime="{{ .date.Format "2006-01-02" }}">{{ .date.Format "Jan 2, 2006" }}</time> · {{ .source }}
+      </span>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end -}}
